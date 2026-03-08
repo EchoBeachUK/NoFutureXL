@@ -24,7 +24,7 @@ Addrs0:
 ; Display instructions
 DISPLAY_INSTRUCTIONS_0:
                         LD IX,START_MESSAGEA1_0         ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,SBCFAX_CONTROLS_TOP_0     ;
                         CALL DISPLAY_LARGE_TELETEXT_COMPRESSED_0 ; Display data
                         LD IX,SBCFAX_CONTROLS_BOTTOM_0  ;
@@ -35,45 +35,52 @@ DISPLAY_INSTRUCTIONS_0:
                         CP 1                            ; Is it joystick selected?
                         JR Z,SKIP_DISPLAY_KEYBOARD_INSTRUCTIONS_0;
                         CP 2                            ; Is it joystick selected?
-                        JR Z,SKIP_DISPLAY_KEYBOARD_INSTRUCTIONS_0;
+                        JR Z,SKIP_DISPLAY_KEYBOARD_INSTRUCTIONS_0b;
 
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1C_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1C1_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1C2_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1C3_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1C4_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1C5_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
 
 
 
                         CALL DISPLAY_START_NEWS         ;
                         JP DISPLAY_WRITER_INSTRUCTIONS_0 ;
 
-
-
 SKIP_DISPLAY_KEYBOARD_INSTRUCTIONS_0:
 
+                        LD IX,DISPLAY_INSTRUCTIONS_DATA1Z_0 ;
+                        CALL DISPLAY_STRING             ; Display string
+                        LD IX,DISPLAY_INSTRUCTIONS_DATA1Z1 ;
+                        CALL DISPLAY_STRING             ; Display string
+                        CALL DISPLAY_START_NEWS         ;
+                        JP DISPLAY_WRITER_INSTRUCTIONS_0;
+
+SKIP_DISPLAY_KEYBOARD_INSTRUCTIONS_0b:
+
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1B_0 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         LD IX,DISPLAY_INSTRUCTIONS_DATA1B1 ;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
                         CALL DISPLAY_START_NEWS         ;
 
 DISPLAY_WRITER_INSTRUCTIONS_0:
 
                         LD IX,DISPLAY_INSTRUCTIONS_DATA2_0;
-                        CALL DISPLAY_STRING             ;
+                        CALL DISPLAY_STRING             ; Display string
 
                         LD B,4                          ; Time for Hi instructions to be displayed
 C36326B_0:
                         PUSH BC                         ;
-                       ; CALL CHANGE_HI_SCORE_SCREEN_COLOUR ; Change the table colours so they flash
+                        ; CALL CHANGE_HI_SCORE_SCREEN_COLOUR ; Change the table colours so they flash
                         POP BC                          ;
                         DJNZ C36326B_0                  ;
                         RET                             ;
@@ -1081,7 +1088,7 @@ START_MESSAGEB_0:
 
 TITLE_0:
                         DEFB 17,5,74,1                  ; Line,Collumn,Colour,1=Double Height
-                        DEFM " N O  F U T U R E  X L#"      ; String to display
+                        DEFM " N O  F U T U R E  X L#"  ; String to display
                         DEFB 255                        ; String end flag
 
 START_MESSAGE2_0:
@@ -1101,20 +1108,17 @@ START_MESSAGE2B_0:
                         DEFB 255                        ;
 
 PRESS_ANY_KEY_0:
-                        DEFB 20,9,96,0                  ;
+                        DEFB 0,9,77,0                  ;
                         DEFM " PRESS ANY KEY "          ;
                         DEFB 255                        ;
 
 
 SELECT_CONTROLS_TEXT_0:
-
                         DEFB 20,2,114,0                 ;
                         DEFM "Select controls:            " ;
                         DEFB 255                        ;
 
-
 DISPLAY_INSTRUCTIONS_DATA1C_0:
-
                         DEFB 9,2,79,0                   ;
                         DEFM " To move left               " ;
                         DEFB 255                        ;
@@ -1156,24 +1160,33 @@ DISPLAY_INSTRUCTIONS_DATA1E_0:
                         DEFB 255                        ;
 
 DISPLAY_INSTRUCTIONS_DATA1B_0:
-
                         DEFB 10,2,79,0                  ;
-                        DEFM "       GAME CONTROLS        " ;
+                        DEFM "    FULLER GAME CONTROLS    " ;
                         DEFB 255                        ;
 
-                        DISPLAY_INSTRUCTIONS_DATA1B1:   ;
-                        DEFB 12,9,71,0                  ;
-                        DEFM "JOYSTICK LEFT#"           ;
-                        DEFM "JOYSTICK RIGHT#"          ;
-                        DEFM "JOYSTICK FIRE##"          ;
+DISPLAY_INSTRUCTIONS_DATA1B1:   ;
+                        DEFB 12,5,71,0                  ; Line,Collumn,Colour,1=Double Height
+                        DEFM "FULLER JOYSTICK LEFT#"    ;
+                        DEFM "FULLER JOYSTICK RIGHT#"   ;
+                        DEFM "FULLER JOYSTICK FIRE##"   ;
                         DEFB 255                        ;
 
+DISPLAY_INSTRUCTIONS_DATA1Z_0:
+                        DEFB 10,2,79,0                  ;
+                        DEFM "   KEMPSTON GAME CONTROLS   " ;
+                        DEFB 255                        ;
 
+DISPLAY_INSTRUCTIONS_DATA1Z1:;
+                        DEFB 12,5,71,0                  ; Line,Collumn,Colour,1=Double Height
+                        DEFM "KEMPSTON JOYSTICK LEFT#"  ;
+                        DEFM "KEMPSTON JOYSTICK RIGHT#" ;
+                        DEFM "KEMPSTON JOYSTICK FIRE##" ;
+                        DEFB 255                        ;
 
 DISPLAY_INSTRUCTIONS_DATA2_0:
                         DEFB 18,2,114,0                 ;
                         DEFM "No Future 128 By Steve Broad#" ;
-                        DEFM "V1.3 (C)MYCAT SOFTWARE 2024 " ;
+                        DEFM " V2 (C)MYCAT SOFTWARE 2024  " ;
                         DEFB 255                        ;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1381,12 +1381,11 @@ WAVE_DATA50:            DEFB 15                         ; No of aliens
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Manipulate wave data
 PROCESS_WAVE_DATA_3:
-                        LD HL,WAVE_DATA1_3                ; Point to wave data
+                        LD HL,WAVE_DATA1_3              ; Point to wave data
                         LD A,(WAVE_COUNT)               ; Get wave counter
                         OR A                            ; CP 0                            ; Wave 0?
                         JR Z,SKIP_WAVE_ADD              ; Skip adding wave blocks if so
                         LD DE,106                       ; Setup DE for addition
-
 SELECT_WAVE_LOOP:
                         ADD HL,DE                       ; Move to correct block
 
@@ -1400,7 +1399,7 @@ SKIP_WAVE_ADD:
 ;HL=wave table data pointer that we need to copy to live wave data area
 
                         LD DE,LIVE_WAVE_DATA_STORE      ; Point to Live wave data store
-                        LD BC,106                       ; 136 wave data bytes to copy
+                        LD BC,106                       ; 106 wave data bytes to copy
                         LDIR                            ; Copy data
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;LIVE_WAVE_DATA_STORE:
