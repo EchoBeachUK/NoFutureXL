@@ -1,4 +1,4 @@
-NoFutureXL
+NoFutureXL V2
 No Future Z80 game for the Sinclair ZX Spectrum 128K High level report:
 
 Loading: Use the 128K menu on the Spectrum to select "Tape Loader". Then press the Enter key and the computer will load the tape after you press the play button on the tape recorder.
@@ -32,3 +32,11 @@ I hate the beep sound on the 48K spectrum and wanted some arcade sounds. So I ad
 I wanted to do the title music in AY format for the 128K verion. But time was not available and I just wanted to get this released. If someone wants to add this into the code, please do and email me at stevebroad@yahoo.com to upload it here.
 
 (c) 2024 Mycat Software. Game concept by Steve Broad. www.stevebroad.co.uk
+
+V2 ADDITIONS AND BUG FIXES.
+Optimised game play.
+Joystick instruction screens more descriptive.
+Moved Press any key icon to top of title image.
+Added more source information text.
+Boom bonus not as easy to obtain.
+Added lives figure to start screen.
